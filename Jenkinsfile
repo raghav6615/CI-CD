@@ -1,7 +1,7 @@
 pipeline{
     agent any
-    triggers {
-        pollSCM '* * * * *'
+    tools {
+        jdk 'Java_11'
     }
     stages {
         stage('Build') {
