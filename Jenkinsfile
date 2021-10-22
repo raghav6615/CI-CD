@@ -7,6 +7,7 @@ pipeline {
     	dockerImage = ''
 		registry = "raghav6615/demo"
 		DOCKERHUB_CREDENTIALS=credentials('docker_cred')
+		registryCredential=docker_cred
     }
 	stages {
 		stage('build') {
@@ -32,8 +33,21 @@ pipeline {
 				script{
 					dockerImage=docker.build(registry)
 				}
+			}
 		}
-}
-	
+		stage('Deploy our image') { 
+            steps { 
+                script { 
+                    docker.withRegistry( '', registryCredential ) { 
+                        dockerImage.push() 
+                    }
+                } 
+            }
+        } 
+		stage('Cleaning up') {
+			steps {
+				bat "docker rmi raghav6615/demo"
+			}
+		}
 	}
 }
