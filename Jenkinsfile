@@ -30,9 +30,8 @@ pipeline {
 		stage('Building Our Image') {
 			steps {
 				script{
-					dockerImage=docker.build()
+					dockerImage=docker.build(registry)
 				}
-			bat 'docker build . --tag demo'
 		}
 }
 	
