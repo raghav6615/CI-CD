@@ -3,6 +3,11 @@ pipeline {
 	tools {
 		jdk 'Java_11'
 	}
+	environment { 
+    	dockerImage = ''
+		registry = "raghav6615/demo"
+		DOCKERHUB_CREDENTIALS=credentials('docker_cred')
+    }
 	stages {
 		stage('build') {
 			steps {
@@ -22,7 +27,14 @@ pipeline {
 			bat 'mvn package'
 			}
 		}
-		
+		stage('Building Our Image') {
+			steps {
+				script{
+					dockerImage=docker.build()
+				}
+			bat 'docker build . --tag demo'
+		}
+}
 	
 	}
 }
