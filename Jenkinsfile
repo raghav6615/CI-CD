@@ -46,7 +46,7 @@ pipeline {
         } 
 		stage('Cleaning up') {
 			steps {
-				bat "docker rmi raghav6615/demo"
+				bat "docker rmi $registry"
 			}
 		}
 	}
