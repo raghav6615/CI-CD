@@ -5,7 +5,7 @@ pipeline {
 	}
 	environment { 
     	dockerImage = ''
-		registry = "demo"
+		registry = "raghav6615/demo"
 		DOCKERHUB_CREDENTIALS=credentials('docker_cred')
 		registryCredential= 'docker_cred'
     }
