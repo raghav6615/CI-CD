@@ -5,7 +5,7 @@ pipeline {
 	}
 	environment { 
     	dockerImage = ''
-		registry = "demo-$BUILD_NUMBER"
+		registry = "raghav6615/demo-$BUILD_NUMBER"
 		DOCKERHUB_CREDENTIALS=credentials('docker_cred')
 		registryCredential= 'docker_cred'
 		IMAGE_PREFIX = 'raghav6615'
@@ -47,7 +47,7 @@ pipeline {
         } 
 		stage('Cleaning up') {
 			steps {
-				bat "docker rmi raghav6615/demo"
+				bat "docker rmi $registry"
 			}
 		}
 	}
