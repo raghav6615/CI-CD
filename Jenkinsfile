@@ -5,10 +5,8 @@ pipeline {
 	}
 	environment { 
     	dockerImage = ''
-		registry = "raghav6615/demo-$BUILD_NUMBER"
-		DOCKERHUB_CREDENTIALS=credentials('docker_cred')
+		registry = "raghav6615/demo:$BUILD_NUMBER"
 		registryCredential= 'docker_cred'
-		IMAGE_PREFIX = 'raghav6615'
     }
 	stages {
 		stage('build') {
