@@ -1,0 +1,36 @@
+kind: Service
+apiVersion: v1
+metadata:
+  name: demo
+spec:
+  selector:
+    app: demo
+  ports:
+  - protocol: TCP
+    port: 80
+    targetPort: 8081
+  type: NodePort
+---
+apiVersion: apps/v1
+kind: Deployment
+metadata:
+  name: demo
+spec:
+  replicas: 2
+  selector:
+    matchLabels:
+      app: demo
+  template:
+    metadata:
+      labels:
+        app: demo
+    spec:
+      containers:
+        - name: demo
+          image: fatmamunazza/demo:latest
+          imagePullPolicy: Always
+          ports:
+          - containerPort: 8081
+      imagePullSecrets:
+        - name: secretfile
+
